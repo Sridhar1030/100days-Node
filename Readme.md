@@ -16,7 +16,7 @@ The 100 Days of NodeJS Challenge is a self-paced learning journey aimed at build
 
 Let's get started and make the next 100 days productive and fun!
 
-## Timeline
+## [Timeline](https://github.com/Sridhar1030/100days-Backend/blob/main/Timeline.md)
 
 Refer to the `timeline.md` file for the daily breakdown of topics and activities.
 
