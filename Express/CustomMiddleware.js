@@ -12,7 +12,6 @@ app.use(express.json());
 
 app.use(mymiddlwareFunction)
 
-app.use(mymiddlwareFunction2)
 
 let courses = [
   { id: 1, name: "JavaScript" },
@@ -26,8 +25,9 @@ app.get("/", (req, res) => {
 });
 
 
-app.get("/courses", (req,res)=>{
-    res.send(courses)
+app.get("/courses",mymiddlwareFunction2, (req,res)=>{
+  res.send(courses)
+  
 });
 
 app.post("/course",(req,res)=>{
