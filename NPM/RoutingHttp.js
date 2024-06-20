@@ -8,9 +8,9 @@ const server = http.createServer((req, res) => {
   res.setHeader('Content-Type', 'text/plain');
   
   // Basic routing
-  if (req.url === '/') {
-    res.end('Welcome to the homepage!');
-  } else if (req.url === '/about') {
+    if (req.url === '/') {
+      res.end('Welcome to the homepage!');
+    } else if (req.url === '/about') {
     res.end('This is the about page.');
   } else if (req.url === '/contact') {
     res.end('This is the contact page.');
