@@ -73,4 +73,4 @@ db.courses.updateMany({price:"100"},{$set:{price:0}})
 
 // !Delete
 
-db.courses.deleteMany({price:"1000"})
+db.courses.deleteMany({price:"1000 "})
