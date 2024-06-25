@@ -16,7 +16,7 @@ const errorHandlingMiddleware = (error, req, res, next) => {
 app.use(errorHandlingMiddleware);
 
 // Route handler for POST request expecting integer values
-app.post("/", express.urlencoded({ extended: true }), (req, res, next) => {
+app.post("/", express.json(), (req, res, next) => {
     const { value1, value2 } = req.body;
 
     // Check if values are integers
