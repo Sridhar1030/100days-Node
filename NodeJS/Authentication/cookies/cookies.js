@@ -1,66 +1,42 @@
-const express = require('express');
-const session = require('express-session');
-const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
+const express = require("express");
+const cookieParser = require("cookie-parser");
 
 const app = express();
-const PORT = 3000;
-
-// Middleware
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(session({
-    secret: 'your-secret-key',
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false } // Set secure: true in production
-}));
 
-// Middleware to check if the user is authenticated
-const isAuthenticated = (req, res, next) => {
-    if (req.session.user) {
-        next();
-    } else {
-        res.redirect('/login');
-    }
-};
-
-// Routes
-app.get('/', isAuthenticated, (req, res) => {
-    res.send(`Welcome ${req.session.user}! <a href="/logout">Logout</a>`);
+app.get("/", (req, res) => {
+	res.send("Welcome to the homepage");
 });
 
-app.get('/login', (req, res) => {
-    res.send(`
-        <form action="/login" method="post">
-            <input type="text" name="username" placeholder="Username" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <button type="submit">Login</button>
-        </form>
-    `);
+app.get("/set-cookie", (req, res) => {
+	// res.setHeader('set-cookie',"foo=bar")
+	res.cookie("foo", "bar", {
+		// !expiry time
+
+		// maxAge: 5000,
+		// expires: new Date('28 June 2024'),
+		// httpOnly:true,
+		// secure: true,
+        // domain: "example.com"
+        
+
+
+
+	});
+	// res.cookie("cookie1","milk")
+	res.send("cookies are set");
 });
 
-app.post('/login', (req, res) => {
-    const { username, password } = req.body;
-    // Replace with proper authentication
-    if (username === 'sridhar' && password === '1234') {
-        req.session.user = username;
-        res.redirect('/');
-    } else {
-        res.send('Invalid username or password');
-    }
+app.get("/get-cookie", (req, res) => {
+	console.log(req.cookies);
+	res.send(req.cookies);
 });
 
-app.get('/logout', (req, res) => {
-    req.session.destroy(err => {
-        if (err) {
-            return res.redirect('/');
-        }
-        res.clearCookie('connect.sid');
-        res.redirect('/login');
-    });
+app.get("/del-cookie", (req, res) => {
+	res.clearCookie("cookie1");
+	res.send("cookie foo deleted");
 });
 
-app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+app.listen(3000, () => {
+	console.log("Server running on http://localhost:3000");
 });
