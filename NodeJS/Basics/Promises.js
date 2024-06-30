@@ -32,14 +32,15 @@ getBoredActivity();
 // !custom promise
 function getActivity() {
 	return new Promise((resolve, reject) => {
-		axiosRequest
-			.get("https://www.boredapi.com/api/activity")
-			.then((response) => {
-				resolve(response.data.activity);
-			})
-			.catch((error) => {
-				reject(error);
-			});
+        // Simulate an asynchronous operation
+		setTimeout(() => {
+			const success = true; // Simulate a condition
+			if (success) {
+				resolve("Custom operation was successful!");
+			} else {
+				reject("Custom operation failed.");
+			}
+		}, 1000);
 	});
 }
 
@@ -51,6 +52,7 @@ getActivity()
 		console.log(error);
 	});
 
+//  * Most compact way
 // !STANDARD WAY TO CREATE A PROMISE
 async function Activity() {
 	try {
