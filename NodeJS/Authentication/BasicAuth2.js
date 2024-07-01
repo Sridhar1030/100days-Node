@@ -20,7 +20,7 @@ const authenticate = (req, res, next) => {
 
 // Apply authentication middleware to all routes
 app.use(authenticate);
-
+   
 // Protected route
 app.get('/protected', (req, res) => {
     res.send('Hello, you are authenticated!');
