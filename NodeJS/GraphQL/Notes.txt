@@ -1,0 +1,14 @@
+GraphQL is a query language
+Alternative to using a REST API
+
+Eg rest api endpoints
+pokemonsite.com/api/pokemon
+pokemonsite.com/api/pokemon/123
+
+Drawbacks
+1. Overfetching
+2. Underfetching
+
+Like postman is used to test REST API 
+Apollo is used to test GraphQL APIS
+GraphQL make a Graph the query allows us to traverse the graph 
