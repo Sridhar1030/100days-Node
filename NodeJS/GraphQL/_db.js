@@ -76,7 +76,7 @@ let reviews = [
 		id: "3",
 		rating: 3,
 		content: "Average Game",
-		author_id: "3",
+		author_id: "2",
 		game_id: "3",
 	},
 	{
