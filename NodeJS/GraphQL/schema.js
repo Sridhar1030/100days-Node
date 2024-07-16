@@ -25,6 +25,7 @@ export const typeDefs = `#graphql
         review(id: ID!): Review,
         authors: [Author]
         author(id:ID!):Author
+        
     }
 
     type Mutation {

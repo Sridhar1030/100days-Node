@@ -25,6 +25,32 @@ let games = [
 		title: "Valorant",
 		platform: ["Switch", "PS5", "Anroid"],
 	},
+	{
+		id: "6",
+		title: "Fortnite",
+		platform: ["Switch", "PS5", "Anroid"],
+	},
+	{
+		id: "7",
+		title: "Apex Legends",
+		platform: ["Switch", "PS5", "Anroid"],
+	},
+	{
+		id: "8",
+		title: "Minecraft",
+		platform: ["Switch", "PS5", "Anroid"],
+	},
+	{
+		id: "9",
+		title: "Among Us",
+		platform: ["Switch", "PS5", "Anroid"],
+	},
+	{
+		id: "10",
+		title: "Cyberpunk",
+		platform: ["Switch", "PS5", "Anroid"],
+	},
+	
 ];
 
 let authors = [
