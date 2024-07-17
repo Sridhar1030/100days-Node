@@ -1,0 +1,1 @@
+Streaming files instead of reading them entirely into memory refers to a technique used in web development and file handling where the contents of a file are processed and transmitted piece by piece, rather than loading the entire file into memory all at once
