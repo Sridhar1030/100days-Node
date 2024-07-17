@@ -6,8 +6,8 @@ const app = express();
 
 // Define a route to stream a file
 app.get('/download', (req, res) => {
-    // const filePath = 'F:/100days-Node/NodeJS/File_Streaming/Syllabus.pdf'; 
-    const filePath = 'F:/100days-Node/NodeJS/File_Streaming/example.txt'; 
+    const filePath = 'F:/100days-Node/NodeJS/File_Streaming/Syllabus.pdf'; 
+    // const filePath = 'F:/100days-Node/NodeJS/File_Streaming/example.txt'; 
     
     console.log('filePath:', filePath);
     
@@ -20,7 +20,8 @@ app.get('/download', (req, res) => {
         
         // Set appropriate headers
         res.writeHead(200, {
-            'Content-Type': 'text/plain',
+            // 'Content-Type': 'text/plain',
+            'Content-Type': 'application/pdf',
             'Content-Length': stats.size
         });
         
