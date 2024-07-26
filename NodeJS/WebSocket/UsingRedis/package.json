@@ -1,0 +1,20 @@
+{
+	"name": "usingredis",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"type": "module",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "nodemon src/server.js"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"express": "^4.19.2",
+		"redis": "^4.6.15",
+		"socket.io": "^4.7.5",
+		"socket.io-redis": "^6.1.1"
+	}
+}
