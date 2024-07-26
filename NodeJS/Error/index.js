@@ -27,7 +27,7 @@ app.use((err, req, res, next) => {
 		error: {
 			message: err.message,
 		},
-	});
+	}); 
 });
 
 const PORT = process.env.PORT || 3000;
