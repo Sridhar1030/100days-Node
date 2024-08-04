@@ -1,0 +1,14 @@
+{
+  "name": "serverless-function-example",
+  "version": "1.0.0",
+  "description": "Example project to deploy serverless functions using AWS Lambda",
+  "main": "handler.js",
+  "scripts": {
+    "deploy": "serverless deploy",
+    "remove": "serverless remove"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "serverless": "^3.0.0"
+  }
+}
