@@ -1,0 +1,19 @@
+config:
+    target: "ws://localhost:8080"
+    phases:
+        - duration: 60
+          arrivalRate: 10
+          name: "Warm up"
+        - duration: 300
+          arrivalRate: 50
+          name: "Sustained load"
+
+scenarios:
+    - engine: "ws"
+      flow:
+          - send:
+                text: "Hello, WebSocket!"
+          - think: 5
+          - send:
+                text: "How are you?"
+          - think: 5

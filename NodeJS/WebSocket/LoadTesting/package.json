@@ -1,0 +1,14 @@
+{
+	"name": "websocket-load-testing",
+	"version": "1.0.0",
+	"main": "server.js",
+	"scripts": {
+		"start": "node server.js"
+	},
+	"dependencies": {
+		"ws": "^8.0.0"
+	},
+	"devDependencies": {
+		"artillery": "^1.7.8"
+	}
+}
