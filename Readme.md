@@ -20,6 +20,4 @@ Let's get started and make the next 100 days productive and fun!
 
 Refer to the `timeline.md` file for the daily breakdown of topics and activities.
 
----
 
-Happy coding!
