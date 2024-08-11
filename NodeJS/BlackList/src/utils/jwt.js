@@ -1,9 +1,15 @@
 import jwt from "jsonwebtoken";
 import BlacklistedToken from "../models/BlacklistedToken.js";
 
-export const signToken = (payload) => {
-	return jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "1h" });
+
+const signToken = (userId) => {
+    return jwt.sign({ id: userId }, process.env.JWT_SECRET, {
+        expiresIn: process.env.JWT_EXPIRES_IN,
+    });
 };
+
+export default signToken;
+
 
 export const verifyToken = async (token) => {
 	const blacklisted = await BlacklistedToken.findOne({ token });
