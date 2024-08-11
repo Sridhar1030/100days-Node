@@ -27,7 +27,7 @@ router.post("/login", async (req, res) => {
 
 	const token = signToken({ id: user._id });
 
-	res.status(200).json({ token });
+	res.status(200).json({token});
 });
 
 router.post("/logout", authenticate, blacklistToken);
