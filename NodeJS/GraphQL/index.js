@@ -1,13 +1,15 @@
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
+import { applyMiddleware } from "graphql-middleware";
+import { makeExecutableSchema } from "@graphql-tools/schema";
 
-//db
+// Database
 import db from "./_db.js";
 
-//!types
+// Type Definitions
 import { typeDefs } from "./schema.js";
 
-// !resolvers
+// Resolvers
 const resolvers = {
 	Query: {
 		games: () => db.games,
@@ -93,10 +95,18 @@ const resolvers = {
 	},
 };
 
-//*server setup
+// Import Middleware
+import { loggingMiddleware } from "./middleware.js";
+
+// Create the executable schema
+const schema = makeExecutableSchema({ typeDefs, resolvers });
+
+// Apply middleware to the schema
+const schemaWithMiddleware = applyMiddleware(schema, loggingMiddleware);
+
+// Server setup
 const server = new ApolloServer({
-	typeDefs, // Definitions of different types of Data
-	resolvers, // Used to handle queries based on the schema and type
+	schema: schemaWithMiddleware, // Use schema with middleware
 });
 
 const { url } = await startStandaloneServer(server, {
