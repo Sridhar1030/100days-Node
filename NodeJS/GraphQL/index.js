@@ -6,10 +6,10 @@ import { makeExecutableSchema } from "@graphql-tools/schema";
 // Database
 import db from "./_db.js";
 
-// Type Definitions
+//! Type Definitions
 import { typeDefs } from "./schema.js";
 
-// Resolvers
+//! Resolvers
 const resolvers = {
 	Query: {
 		games: () => db.games,
@@ -95,7 +95,7 @@ const resolvers = {
 	},
 };
 
-// Import Middleware
+//! Import Middleware
 import { loggingMiddleware } from "./middleware.js";
 
 // Create the executable schema
