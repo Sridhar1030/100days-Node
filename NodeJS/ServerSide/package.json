@@ -1,0 +1,17 @@
+{
+  "name": "serverside",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.0",
+    "ejs": "^3.1.6"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

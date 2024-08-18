@@ -13,8 +13,7 @@ require('./config/database'); // Connect to the database
     await book.save();
 
     // Retrieve the book and populate the author field
-    const populatedBook = await Book.findOne({ title: 'Harry Potter' }).populate('author');
-    console.log('Book with populated author:', populatedBook);
+ 
 
     mongoose.connection.close();
 })();
