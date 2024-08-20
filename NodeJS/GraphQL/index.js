@@ -1,9 +1,11 @@
+import express from "express";
 import { ApolloServer } from "@apollo/server";
-import { startStandaloneServer } from "@apollo/server/standalone";
+import { expressMiddleware } from "@apollo/server/express4";
 import { applyMiddleware } from "graphql-middleware";
 import { makeExecutableSchema } from "@graphql-tools/schema";
+import rateLimit from "express-rate-limit";
 
-// Database
+// Database and Middleware
 import db from "./_db.js";
 
 //! Type Definitions
@@ -104,13 +106,28 @@ const schema = makeExecutableSchema({ typeDefs, resolvers });
 // Apply middleware to the schema
 const schemaWithMiddleware = applyMiddleware(schema, loggingMiddleware);
 
-// Server setup
+// Create Express App
+const app = express();
+
+// Apply Rate Limiting Middleware
+const limiter = rateLimit({
+	windowMs: 15 * 60 * 1000, // 15 minutes
+	max: 100, // limit each IP to 100 requests per windowMs
+	message: "Too many requests, please try again later.",
+});
+
+app.use(limiter);
+
+// Create Apollo Server
 const server = new ApolloServer({
-	schema: schemaWithMiddleware, // Use schema with middleware
+	schema: schemaWithMiddleware,
 });
 
-const { url } = await startStandaloneServer(server, {
-	listen: { port: 4000 },
-});
+// Apply Apollo Server middleware to Express
+await server.start();
+app.use("/graphql", expressMiddleware(server));
 
-console.log("server ready at port", 4000);
+// Start the Express Server
+app.listen(4000, () => {
+	console.log("Server ready at http://localhost:4000/graphql");
+});
