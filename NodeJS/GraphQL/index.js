@@ -1,15 +1,46 @@
 import express from "express";
 import { ApolloServer } from "@apollo/server";
 import { expressMiddleware } from "@apollo/server/express4";
+import { buildSubgraphSchema } from "@apollo/subgraph";
 import { applyMiddleware } from "graphql-middleware";
-import { makeExecutableSchema } from "@graphql-tools/schema";
 import rateLimit from "express-rate-limit";
 
 // Database and Middleware
 import db from "./_db.js";
 
-//! Type Definitions
-import { typeDefs } from "./schema.js";
+//! Type Definitions with Federation support
+import { gql } from "graphql-tag";
+
+const typeDefs = gql`
+	type Query {
+		games: [Game]
+		game(id: ID!): Game
+		reviews: [Review]
+		review(id: ID!): Review
+		authors: [Author]
+		author(id: ID!): Author
+	}
+
+	type Game @key(fields: "id") {
+		id: ID!
+		title: String!
+		platform: String!
+		reviews: [Review]
+	}
+
+	type Author @key(fields: "id") {
+		id: ID!
+		name: String!
+		reviews: [Review]
+	}
+
+	type Review @key(fields: "id") {
+		id: ID!
+		content: String!
+		author: Author
+		game: Game
+	}
+`;
 
 //! Resolvers
 const resolvers = {
@@ -65,43 +96,13 @@ const resolvers = {
 			return game;
 		},
 	},
-	Mutation: {
-		deleteGame(_, args) {
-			const gameIndex = db.games.findIndex((g) => g.id === args.id);
-			if (gameIndex === -1) {
-				throw new Error("Game not found.");
-			}
-			db.games.splice(gameIndex, 1);
-			return db.games;
-		},
-		addGame(_, args) {
-			if (!args.game.title || !args.game.platform) {
-				throw new Error("Game title and platform are required.");
-			}
-			let game = {
-				...args.game,
-				id: Math.floor(Math.random() * 10000).toString(),
-			};
-			db.games.push(game);
-			return game;
-		},
-		updateGame(_, args) {
-			let game = db.games.find((g) => g.id === args.id);
-			if (!game) {
-				throw new Error("Game not found.");
-			}
-			game = { ...game, ...args.edits };
-			db.games = db.games.map((g) => (g.id === args.id ? game : g));
-			return game;
-		},
-	},
 };
 
 //! Import Middleware
 import { loggingMiddleware } from "./middleware.js";
 
-// Create the executable schema
-const schema = makeExecutableSchema({ typeDefs, resolvers });
+// Create the executable schema with federation support
+const schema = buildSubgraphSchema([{ typeDefs, resolvers }]);
 
 // Apply middleware to the schema
 const schemaWithMiddleware = applyMiddleware(schema, loggingMiddleware);
