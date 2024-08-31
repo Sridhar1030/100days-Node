@@ -1,36 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
-		<title>WebSocket Test</title>
-		<script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
-	</head>
-	<body>
-		<h1>WebSocket Test</h1>
-		<input id="messageInput" type="text" placeholder="Type a message..." />
-		<button id="sendMessageButton">Send Message</button>
-		<ul id="messages"></ul>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>WebSocket with Redis</title>
+		<script src="/socket.io/socket.io.js"></script>
 		<script>
-			const socket = io("http://localhost:3000");
-			const messageInput = document.getElementById("messageInput");
-			const sendMessageButton =
-				document.getElementById("sendMessageButton");
-			const messages = document.getElementById("messages");
+			document.addEventListener("DOMContentLoaded", () => {
+				const socket = io();
 
-			socket.on("connect", () => {
-				console.log("connected to server");
-			});
+				socket.on("message", (message) => {
+					const el = document.createElement("li");
+					el.textContent = message;
+					document.querySelector("ul").appendChild(el);
+				});
 
-			socket.on("message", (msg) => {
-				const li = document.createElement("li");
-				li.textContent = msg;
-				messages.appendChild(li);
-			});
-
-			sendMessageButton.addEventListener("click", () => {
-				const msg = messageInput.value;
-				socket.emit("message", msg);
-				messageInput.value = "";
+				document.querySelector("button").onclick = () => {
+					const text = document.querySelector("input").value;
+					socket.emit("message", text);
+					document.querySelector("input").value = "";
+				};
 			});
 		</script>
+	</head>
+	<body>
+		<ul></ul>
+		<input type="text" placeholder="Enter message" />
+		<button>Send</button>
 	</body>
 </html>
