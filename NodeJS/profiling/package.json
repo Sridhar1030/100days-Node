@@ -1,0 +1,13 @@
+{
+  "name": "profiling",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "profile": "node --prof src/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
