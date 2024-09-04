@@ -1,0 +1,20 @@
+{
+	"name": "my-npm-package-sridhar1999",
+	"version": "1.0.0",
+	"description": "A simple example NPM package by sridhar",
+	"main": "src/index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"keywords": [
+		"example",
+		"npm",
+		"package"
+	],
+	"author": "Sridhar",
+	"license": "MIT",
+	"dependencies": {
+		"my-npm-package": "^0.0.1",
+		"my-npm-package-sridhar1999": "^1.0.0"
+	}
+}
