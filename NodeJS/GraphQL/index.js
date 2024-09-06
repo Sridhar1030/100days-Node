@@ -4,13 +4,19 @@ import { expressMiddleware } from "@apollo/server/express4";
 import { buildSubgraphSchema } from "@apollo/subgraph";
 import { applyMiddleware } from "graphql-middleware";
 import rateLimit from "express-rate-limit";
-
-// Database and Middleware
+import { gql } from "graphql-tag";
+import { RedisPubSub } from "graphql-redis-subscriptions";
+import Redis from "ioredis";
 import db from "./_db.js";
+import { loggingMiddleware } from "./middleware.js";
+
+// RedisPubSub setup
+const pubSub = new RedisPubSub({
+	publisher: new Redis(),
+	subscriber: new Redis(),
+});
 
 //! Type Definitions with Federation support
-import { gql } from "graphql-tag";
-
 const typeDefs = gql`
 	type Query {
 		games: [Game]
@@ -97,9 +103,6 @@ const resolvers = {
 		},
 	},
 };
-
-//! Import Middleware
-import { loggingMiddleware } from "./middleware.js";
 
 // Create the executable schema with federation support
 const schema = buildSubgraphSchema([{ typeDefs, resolvers }]);

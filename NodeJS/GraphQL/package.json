@@ -25,6 +25,8 @@
     "graphql-query-complexity": "^1.0.0",
     "graphql-subscriptions": "^2.0.0",
     "graphql-ws": "^5.16.0",
+    "ioredis": "^5.4.1",
+    "redis": "^4.7.0",
     "subscriptions-transport-ws": "^0.11.0"
   }
 }
