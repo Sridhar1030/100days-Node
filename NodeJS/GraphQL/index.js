@@ -40,12 +40,12 @@ const typeDefs = gql`
 		reviews: [Review]
 	}
 
-	type Review @key(fields: "id") {
-		id: ID!
-		content: String!
-		author: Author
-		game: Game
-	}
+	# type Review @key(fields: "id") {
+	# 	id: ID!
+	# 	content: String!
+	# 	author: Author
+	# 	game: Game
+	# }
 `;
 
 //! Resolvers
