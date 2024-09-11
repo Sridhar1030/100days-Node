@@ -1,0 +1,1 @@
+global:  scrape_interval: 15sscrape_configs:  - job_name: 'nodejs-app'    static_configs:      - targets: ['host.docker.internal:3000']
